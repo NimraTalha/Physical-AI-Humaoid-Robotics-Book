@@ -236,3 +236,4 @@ cd backend && python simple_server.py
 
 📚 **Full Documentation**: See `DEPLOYMENT.md`, `PRODUCTION_CHECKLIST.md`, and `ENVIRONMENT_VARIABLES.md`
 "# Physical-AI-Humaoid-Robotics-Book" 
+"# Physical-AI-Humaoid-Robotics-Book" 
