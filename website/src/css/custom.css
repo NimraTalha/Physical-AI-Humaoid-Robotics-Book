@@ -13,6 +13,13 @@
   --ifm-color-primary-lightest: #4fddbf;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Custom Docusaurus variables for form styling */
+  --ifm-color-gray-300: #d1d5db; /* Light gray for borders */
+  --ifm-color-white: #ffffff; /* White for light mode input background */
+  --ifm-color-danger: #ef4444; /* Red for error messages */
+  --ifm-color-emphasis-100: #2a2a2a; /* Darker input background for dark mode */
+  --ifm-color-emphasis-400: #555555; /* Darker border for dark mode */
 }
 
 /* For dark mode */
@@ -27,4 +34,121 @@ html[data-theme='dark'] {
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+
+  /* Dark mode specific form variables */
+  --ifm-color-gray-300: #4b5563; /* Darker gray for borders in dark mode */
+  --ifm-color-white: #1a1a1a; /* Dark background for inputs in dark mode */
+}
+
+/* Chapters Modules Card Design - Hover Effect */
+.menu__link {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.menu__link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* If chapters are rendered as actual cards in a grid, this might also apply */
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Sign In / Sign Up Page Styling */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - var(--ifm-navbar-height) - var(--ifm-footer-height));
+  padding: 2rem 0;
+  background-color: var(--ifm-background-color); /* Inherit from theme */
+}
+
+.auth-form-container {
+  background-color: var(--ifm-background-surface-color); /* Inherit from theme */
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px; /* Adjust as needed */
+  text-align: center;
+}
+
+.auth-form-container h1 {
+  color: var(--ifm-font-color-base);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.auth-form-container p {
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 1rem;
+}
+
+.auth-error {
+  color: var(--ifm-color-danger); /* Assuming a danger color variable exists or define one */
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-font-color-base);
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--ifm-color-gray-300); /* Assuming a gray color variable exists */
+  border-radius: 5px;
+  font-size: 1rem;
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-color-white); /* Assuming white for light mode */
+}
+
+html[data-theme='dark'] .form-group input,
+html[data-theme='dark'] .form-group textarea {
+  background-color: var(--ifm-color-emphasis-100); /* Darker input background for dark mode */
+  border-color: var(--ifm-color-emphasis-400);
+  color: var(--ifm-font-color-base);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--ifm-color-primary-rgb), 0.25);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.auth-button:hover {
+  background-color: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
 }
