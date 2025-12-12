@@ -1,0 +1,30 @@
+/**
+ * Any CSS you add here will be applied to all pages of your Docusaurus site.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #25c2a0; /* Docusaurus default blue-green */
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For dark mode */
+html[data-theme='dark'] {
+  --ifm-background-color: #242526; /* Dark background */
+  --ifm-background-surface-color: #2e2e2e; /* Darker surface */
+  --ifm-font-color-base: #e2e2e2; /* Light gray text */
+  --ifm-color-primary: #25c2a0; /* Keep primary consistent for dark mode */
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
