@@ -18,65 +18,101 @@
  * - Fallback to English for untranslated sections
  * - Quality assurance for technical accuracy
  */
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from '@docusaurus/router';
 
 export default function TranslateButton(): JSX.Element {
-  const handleClick = () => {
-    alert(
-      '🚧 Coming Soon!\n\n' +
-      'Urdu translation will be available in Phase 2.\n\n' +
-      'Planned features:\n' +
-      '• Full chapter translation to Urdu (اردو)\n' +
-      '• Right-to-left (RTL) text support\n' +
-      '• Technical terms preserved in English\n' +
-      '• Toggle between English and Urdu instantly\n' +
-      '• Cached translations for faster loading\n' +
-      '• Professional translation quality'
-    );
+  const [isLoading, setIsLoading] = useState(false);
+  const [isTranslated, setIsTranslated] = useState(false);
+  const [originalContent, setOriginalContent] = useState('');
+  const history = useHistory();
+
+  const handleTranslate = async () => {
+    // 1. Check for auth token
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      history.push('/signin');
+      return;
+    }
+
+    const chapterContentElement = document.getElementById('chapter-content');
+    if (!chapterContentElement) {
+      console.error('Chapter content container not found.');
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Toggle back to English if already translated
+    if (isTranslated) {
+      chapterContentElement.innerHTML = originalContent;
+      setIsTranslated(false);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // 2. Capture content
+      const contentToTranslate = chapterContentElement.innerHTML;
+      setOriginalContent(contentToTranslate);
+
+      // 3. Send to backend
+      const response = await fetch('/api/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ content: contentToTranslate, target_language: 'Urdu' }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Translation API failed with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // 4. Replace content with translation
+      if (data.translated_text) {
+        chapterContentElement.innerHTML = data.translated_text;
+        setIsTranslated(true);
+      }
+    } catch (error) {
+      console.error('Translation failed:', error);
+      alert('An error occurred during translation. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <button
       className="translate-button"
-      onClick={handleClick}
-      aria-label="Translate chapter to Urdu"
-      title="Translate this chapter to Urdu"
+      onClick={handleTranslate}
+      disabled={isLoading}
+      aria-label={isTranslated ? "Show original English content" : "Translate chapter to Urdu"}
+      title={isTranslated ? "Show original English content" : "Translate this chapter to Urdu"}
     >
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="translate-icon"
-      >
-        {/* Globe/language icon */}
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M2 12h20"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <span className="translate-text">اردو</span>
-      <span className="translate-label">Urdu</span>
+      {isLoading ? (
+        <span className="translate-label">Translating...</span>
+      ) : (
+        <>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="translate-icon"
+          >
+            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+            <path d="M2 12h20" stroke="currentColor" strokeWidth="2" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2" />
+          </svg>
+          <span className="translate-text">{isTranslated ? 'English' : 'اردو'}</span>
+          <span className="translate-label">{isTranslated ? 'English' : 'Urdu'}</span>
+        </>
+      )}
     </button>
   );
 }

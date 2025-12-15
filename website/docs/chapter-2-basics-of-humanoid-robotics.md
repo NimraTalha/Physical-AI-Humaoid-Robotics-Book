@@ -11,16 +11,16 @@ sidebar_position: 2
 
 By the end of this chapter, you will be able to:
 
-- Understand the mechanical structure of humanoid robots
-- Identify key actuator technologies and their trade-offs
-- Explain the role of sensors in humanoid perception and control
-- Describe the fundamentals of robot kinematics and dynamics
+- Understand the mechanical structure of humanoid robots.
+- Identify key actuator technologies and their trade-offs.
+- Explain the role of sensors in humanoid perception and control.
+- Describe the fundamentals of robot kinematics and dynamics.
 
 ## Introduction
 
-Humanoid robots are designed to mimic human form and movement. Their bipedal structure and anthropomorphic design enable them to navigate human environments and use tools designed for people.
+Humanoid robots are designed to mimic the human form and its movements. Their bipedal (two-legged) structure and human-like design enable them to navigate environments and use tools that were created for people.
 
-Building humanoid robots presents unique engineering challenges: achieving stable bipedal locomotion, coordinating dozens of degrees of freedom, and maintaining balance under dynamic conditions.
+Building humanoid robots presents unique engineering challenges, such as achieving stable bipedal locomotion, coordinating dozens of joints, and maintaining balance under dynamic conditions.
 
 ## Core Concepts
 
@@ -28,122 +28,126 @@ Building humanoid robots presents unique engineering challenges: achieving stabl
 
 #### Degrees of Freedom (DOF)
 
-A **degree of freedom** is an independent direction of motion. Human-like robots typically have:
+A **degree of freedom** is an independent direction in which a part of the robot can move. Human-like robots typically have:
 
-- **Arms**: 7 DOF per arm (shoulder: 3, elbow: 1, wrist: 3)
-- **Legs**: 6 DOF per leg (hip: 3, knee: 1, ankle: 2)
-- **Torso**: 3 DOF (pitch, roll, yaw)
-- **Head**: 2-3 DOF (pan, tilt, optional roll)
+- **Arms**: 7 DOF per arm (3 in the shoulder, 1 in the elbow, 3 in the wrist)
+- **Legs**: 6 DOF per leg (3 in the hip, 1 in the knee, 2 in the ankle)
+- **Torso**: 3 DOF (for bending and twisting)
+- **Head**: 2-3 DOF (for panning and tilting)
 
-**Total**: 25-30 DOF for a full humanoid
+A full humanoid robot can easily have a total of **25-30 DOF**.
 
 #### Kinematic Chains
 
-- **Serial chain**: Joints connected in sequence (like an arm)
-- **Parallel chain**: Multiple actuators control a single joint (increased strength)
-- **Closed-loop chain**: Forms a loop (used in legs for stability)
+- **Serial Chain**: A series of joints connected in sequence, like the links in a human arm.
+- **Parallel Chain**: A setup where multiple actuators control a single joint, which can increase strength and stability.
+- **Closed-Loop Chain**: A structure that forms a closed loop, which is often used in legs to provide better stability.
 
 ### Actuator Technologies
+
+Actuators are the components responsible for moving the robot's joints.
 
 #### 1. Electric Motors
 
 **Advantages:**
-- Precise position control
-- High repeatability
-- Easy to integrate with digital controllers
+- Provide precise position control.
+- Offer high repeatability for consistent movements.
+- Are easy to integrate with digital controllers.
 
 **Types:**
-- **DC brushless motors**: High efficiency, long lifespan
-- **Servo motors**: Built-in position feedback
-- **Stepper motors**: Precise incremental motion
+- **DC Brushless Motors**: Known for their high efficiency and long lifespan.
+- **Servo Motors**: Come with built-in components for position feedback.
+- **Stepper Motors**: Excellent for precise, incremental motion.
 
 #### 2. Hydraulic Actuators
 
 **Advantages:**
-- High power-to-weight ratio
-- Suitable for heavy-duty applications
+- Offer a very high power-to-weight ratio, making them great for heavy lifting.
+- Are well-suited for heavy-duty applications.
 
 **Disadvantages:**
-- Requires hydraulic pump and fluid management
-- Maintenance-intensive
-- Risk of leaks
+- Require a hydraulic pump and careful fluid management.
+- Tend to be maintenance-intensive.
+- Carry a risk of fluid leaks.
 
 #### 3. Pneumatic Actuators
 
 **Advantages:**
-- Compliant (safe for human interaction)
-- Lightweight
+- Are naturally compliant (less rigid), which makes them safer for human interaction.
+- Are very lightweight.
 
 **Disadvantages:**
-- Lower precision than electric motors
-- Requires compressed air source
+- Offer lower precision compared to electric motors.
+- Require a source of compressed air.
 
 ### Sensors for Perception and Control
 
 #### Vision Sensors
 
-- **RGB cameras**: Color imaging for object recognition
-- **Depth cameras** (e.g., RealSense): 3D environment mapping
-- **Stereo cameras**: Depth perception through parallax
+- **RGB Cameras**: Provide color imaging for object recognition.
+- **Depth Cameras** (e.g., Intel RealSense): Used for 3D environment mapping.
+- **Stereo Cameras**: Enable depth perception using parallax, similar to human vision.
 
 #### Proprioceptive Sensors
 
-- **Encoders**: Measure joint angles (position feedback)
-- **IMU (Inertial Measurement Unit)**: Detects orientation and acceleration
-- **Force/Torque sensors**: Measure interaction forces at joints
+These sensors provide information about the robot's own state.
+
+- **Encoders**: Measure joint angles to provide position feedback.
+- **IMU (Inertial Measurement Unit)**: Detects the robot's orientation and acceleration, crucial for balance.
+- **Force/Torque Sensors**: Measure the interaction forces at the joints or end-effectors.
 
 #### Tactile Sensors
 
-- **Pressure sensors**: Detect contact and grip force
-- **Skin sensors**: Distributed touch sensing on robot surface
+- **Pressure Sensors**: Detect contact and help control grip force.
+- **Skin Sensors**: Provide a sense of touch across the robot's body.
 
 ### Kinematics and Dynamics
 
 #### Forward Kinematics
 
-Given joint angles, calculate the end-effector position:
+Given a set of joint angles, forward kinematics calculates the position of the robot's end-effector (like its hand).
 
 ```
 Position = f(θ₁, θ₂, ..., θₙ)
 ```
 
-**Example**: With 3 joint angles (shoulder, elbow, wrist), determine where the hand is in 3D space.
+**Example**: With the angles of the shoulder, elbow, and wrist joints, you can determine exactly where the hand is in 3D space.
 
 #### Inverse Kinematics
 
-Given desired end-effector position, calculate required joint angles:
+Given a desired position for the end-effector, inverse kinematics calculates the joint angles required to get there.
 
 ```
 (θ₁, θ₂, ..., θₙ) = f⁻¹(desired position)
 ```
 
-**Challenge**: Often has multiple solutions or no solution (workspace limits).
+**Challenge**: This is a much harder problem to solve and can often have multiple solutions or even no solution if the target is outside the robot's reachable workspace.
 
 #### Dynamics
 
-Dynamics govern how forces and torques affect motion. The **equation of motion**:
+Dynamics govern how forces and torques affect the robot's motion. The primary **equation of motion** is:
 
 ```
 τ = M(q)q̈ + C(q,q̇)q̇ + G(q)
 ```
 
 Where:
-- **τ**: Joint torques (control input)
-- **M(q)**: Inertia matrix
-- **C(q,q̇)**: Coriolis and centrifugal forces
-- **G(q)**: Gravity forces
+- **τ**: The joint torques, which are the control inputs.
+- **M(q)**: The inertia matrix of the robot.
+- **C(q,q̇)**: The Coriolis and centrifugal forces.
+- **G(q)**: The gravitational forces.
 
 ## Practical Application
 
 ### Walking Control
 
-Humanoid walking requires:
+Enabling a humanoid to walk requires solving several problems simultaneously:
 
-1. **Gait planning**: Define foot trajectories and center of mass motion
-2. **Balance control**: Keep center of pressure within support polygon
-3. **Compliance**: Absorb impacts and adapt to uneven terrain
+1. **Gait Planning**: Defining the trajectory of the feet and the robot's center of mass.
+2. **Balance Control**: Keeping the robot's center of pressure within its support polygon (the area formed by its feet).
+3. **Compliance**: Allowing the robot to absorb impacts and adapt to uneven terrain.
 
-**Zero Moment Point (ZMP)** is a key stability criterion: the point where the net moment from gravity and inertia is zero.
+A key stability criterion for walking is the **Zero Moment Point (ZMP)**, which is the point on the ground where the net moment from gravity and inertial forces is zero.
 
 ### Example: Simple Balance Controller
 
@@ -155,17 +159,17 @@ def balance_controller(imu_data, target_orientation):
     apply_torque_to_ankle_joints(torque_correction)
 ```
 
-This simple controller adjusts ankle torques to maintain upright posture.
+This simple controller adjusts the ankle torques to help the robot maintain an upright posture.
 
 ## Summary
 
-Humanoid robots combine mechanical design, actuation, sensing, and control to achieve human-like motion. The field draws on mechanical engineering, control theory, and AI to create machines that can navigate and interact with human environments.
+Humanoid robots combine mechanical design, actuation, sensing, and control to achieve human-like motion. The field draws on mechanical engineering, control theory, and AI to create machines that can successfully navigate and interact with human environments.
 
 **Key Takeaways:**
-- Humanoids have 25-30 degrees of freedom to mimic human motion
-- Actuator choice (electric, hydraulic, pneumatic) involves trade-offs in power, precision, and safety
-- Sensors provide feedback for perception (vision) and control (encoders, IMUs)
-- Kinematics and dynamics are essential for planning and executing motion
+- Humanoids have 25-30 degrees of freedom to mimic human motion.
+- The choice of actuator (electric, hydraulic, or pneumatic) involves trade-offs in power, precision, and safety.
+- Sensors provide crucial feedback for perception (vision) and control (encoders, IMUs).
+- Kinematics and dynamics are mathematical tools that are essential for planning and executing motion.
 
 ## Further Reading
 

@@ -82,6 +82,7 @@ app.include_router(health_router, prefix="", tags=["Health"])
 app.include_router(query_router, prefix="", tags=["Query"])
 app.include_router(auth_router, prefix="/api", tags=["Authentication"])
 app.include_router(personalize_router, prefix="/api", tags=["Personalization"])
+app.include_router(translate_router, prefix="/api", tags=["Translation"])
 app.include_router(gemini_router, prefix="/api", tags=["Gemini"])
 
 

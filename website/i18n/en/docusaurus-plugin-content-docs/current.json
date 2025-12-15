@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.textbookSidebar.doc.1. Introduction to Physical AI": {
+    "message": "1. Introduction to Physical AI",
+    "description": "The label for the doc item '1. Introduction to Physical AI' in sidebar 'textbookSidebar', linking to the doc chapter-1-introduction-to-physical-ai"
+  },
+  "sidebar.textbookSidebar.doc.2. Basics of Humanoid Robotics": {
+    "message": "2. Basics of Humanoid Robotics",
+    "description": "The label for the doc item '2. Basics of Humanoid Robotics' in sidebar 'textbookSidebar', linking to the doc chapter-2-basics-of-humanoid-robotics"
+  },
+  "sidebar.textbookSidebar.doc.3. ROS 2 Fundamentals": {
+    "message": "3. ROS 2 Fundamentals",
+    "description": "The label for the doc item '3. ROS 2 Fundamentals' in sidebar 'textbookSidebar', linking to the doc chapter-3-ros-2-fundamentals"
+  },
+  "sidebar.textbookSidebar.doc.4. Digital Twin Simulation": {
+    "message": "4. Digital Twin Simulation",
+    "description": "The label for the doc item '4. Digital Twin Simulation' in sidebar 'textbookSidebar', linking to the doc chapter-4-digital-twin-simulation"
+  },
+  "sidebar.textbookSidebar.doc.5. Vision-Language-Action (VLA)": {
+    "message": "5. Vision-Language-Action (VLA)",
+    "description": "The label for the doc item '5. Vision-Language-Action (VLA)' in sidebar 'textbookSidebar', linking to the doc chapter-5-vision-language-action-systems"
+  },
+  "sidebar.textbookSidebar.doc.6. Capstone Project": {
+    "message": "6. Capstone Project",
+    "description": "The label for the doc item '6. Capstone Project' in sidebar 'textbookSidebar', linking to the doc chapter-6-capstone-ai-robot-pipeline"
+  }
+}
