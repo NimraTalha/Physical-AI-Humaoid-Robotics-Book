@@ -126,8 +126,8 @@ User → Vercel (Frontend) → Railway/Render (Backend) → Qdrant + Neon
 ## 🌐 Your Live URLs
 
 **Live Site**: Your Vercel deployment URL (check Vercel dashboard)
-**GitHub Repo**: https://github.com/Mohsinraza23/-Physical-AI-Humanoid-Robotics-Essentials
-**Vercel Dashboard**: https://vercel.com/mohsins-projects-2431842a
+**GitHub Repo**: https://github.com/NimraTalha/Physical-AI-Humaoid-Robotics-Book
+**Vercel Dashboard**: https://physical-ai-humaoid-robotics-book.vercel.app/
 
 ---
 
