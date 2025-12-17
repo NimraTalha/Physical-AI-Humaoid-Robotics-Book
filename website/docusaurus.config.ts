@@ -58,7 +58,7 @@ const config: Config = {
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: ['./src/css/custom.css', './src/css/translate.css', './src/css/personalize.css', './src/css/auth.css'],
         },
       } satisfies Preset.Options,
     ],

@@ -105,6 +105,7 @@
 }
 
 /* ==== MODAL HEADER ==== */
+.chatbot-modal-header {
   background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
   color: white;
   padding: 1.5rem;

@@ -7,27 +7,30 @@
 .translate-button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: var(--ifm-color-emphasis-100);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
-  color: var(--ifm-color-content);
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%; /* Make it round */
+  background: linear-gradient(135deg, #25c2a0, #a855f7); /* Sea green to purple gradient */
+  border: 2px solid transparent; /* Use transparent border to avoid conflicts with gradient */
+  color: white;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .translate-button:hover {
-  background: var(--ifm-color-emphasis-200);
-  border-color: var(--ifm-color-emphasis-400);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #21af90, #9333ea); /* Darker gradient on hover */
+  transform: translateY(-3px) scale(1.1); /* Enhanced hover effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #ffffff; /* Add white border on hover */
 }
 
 .translate-button:active {
-  transform: translateY(0);
+  transform: translateY(-1px) scale(1.05);
 }
 
 .translate-button:focus {
@@ -37,7 +40,9 @@
 
 .translate-icon {
   flex-shrink: 0;
-  color: var(--ifm-color-emphasis-700);
+  color: white;
+  width: 20px;
+  height: 20px;
 }
 
 .translate-text {
@@ -46,47 +51,93 @@
   user-select: none;
   /* Urdu text in Arabic script */
   font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', Arial, sans-serif;
+  display: none; /* Hide text to make it circular */
 }
 
 .translate-label {
   user-select: none;
+  display: none; /* Hide label to make it circular */
+}
+
+/* Show text on larger screens if we want text */
+@media (min-width: 768px) {
+  .translate-button {
+    width: auto;
+    height: auto;
+    padding: 8px 14px;
+    border-radius: 22px; /* Pill-shaped */
+  }
+
+  .translate-text {
+    display: inline;
+  }
+
+  .translate-label {
+    display: inline;
+  }
 }
 
 /* Dark mode adjustments */
 [data-theme='dark'] .translate-button {
-  background: var(--ifm-color-emphasis-200);
-  border-color: var(--ifm-color-emphasis-400);
+  background: #25c2a0;
+  border-color: #25c2a0;
 }
 
 [data-theme='dark'] .translate-button:hover {
-  background: var(--ifm-color-emphasis-300);
-  border-color: var(--ifm-color-emphasis-500);
+  background: #21af90;
+  border-color: #21af90;
 }
 
-/* Responsive - show only flag on small screens */
-@media (max-width: 576px) {
-  .translate-label {
-    display: none;
-  }
-
+/* Responsive - circular on small screens */
+@media (max-width: 767px) {
   .translate-button {
-    padding: 8px 12px;
+    width: 40px;
+    height: 40px;
   }
 }
 
-/* Future: RTL support for Urdu content */
-/*
-[data-language='urdu'] {
+/* Urdu content RTL support */
+.urdu-content {
   direction: rtl;
   text-align: right;
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-[data-language='urdu'] article {
+.urdu-content h1,
+.urdu-content h2,
+.urdu-content h3,
+.urdu-content h4,
+.urdu-content h5,
+.urdu-content h6 {
+  text-align: right;
   direction: rtl;
 }
 
-[data-language='urdu'] code {
+.urdu-content p,
+.urdu-content li {
+  text-align: right;
+  direction: rtl;
+  line-height: 1.8;
+}
+
+.urdu-content code {
   direction: ltr;
   display: inline-block;
+  text-align: left;
+  unicode-bidi: embed;
 }
-*/
+
+.urdu-content pre {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: embed;
+}
+
+.urdu-content blockquote {
+  border-right: 4px solid var(--ifm-color-primary);
+  border-left: none;
+  margin-right: 0;
+  margin-left: 1.5rem;
+  padding-right: 1rem;
+  padding-left: 0;
+}

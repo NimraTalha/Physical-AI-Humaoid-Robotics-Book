@@ -4,29 +4,47 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #25c2a0; /* Docusaurus default blue-green */
+  --ifm-color-primary: #25c2a0; /* Light sea green */
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
   --ifm-color-primary-darkest: #1a8870;
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-secondary: #a855f7; /* Light purple */
+  --ifm-color-secondary-dark: #9333ea;
+  --ifm-color-secondary-darker: #7e22ce;
+  --ifm-color-secondary-light: #c4b5fd;
+  --ifm-color-secondary-lighter: #ddd6fe;
+  --ifm-color-secondary-lightest: #f3e8ff;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
   /* Custom Docusaurus variables for form styling */
   --ifm-color-gray-300: #d1d5db; /* Light gray for borders */
-  --ifm-color-white: #ffffff; /* White for light mode input background */
+  --ifm-color-white: #f9fafb; /* Lighter white background */
+  --ifm-color-black: #0f172a; /* Darker black */
   --ifm-color-danger: #ef4444; /* Red for error messages */
-  --ifm-color-emphasis-100: #2a2a2a; /* Darker input background for dark mode */
-  --ifm-color-emphasis-400: #555555; /* Darker border for dark mode */
+  --ifm-color-emphasis-100: #e5e7eb; /* Lighter emphasis background */
+  --ifm-color-emphasis-200: #d1d5db;
+  --ifm-color-emphasis-300: #9ca3af;
+  --ifm-color-emphasis-400: #6b7280;
+  --ifm-color-emphasis-500: #4b5563;
+  --ifm-color-emphasis-600: #374151;
+  --ifm-color-emphasis-700: #374151;
+  --ifm-color-emphasis-800: #1f2937;
+  --ifm-color-emphasis-900: #111827;
+
+  /* Background gradient variables */
+  --ifm-background-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+  --ifm-background-radial: radial-gradient(circle, #25c2a0 0%, #a855f7 100%);
 }
 
 /* For dark mode */
 html[data-theme='dark'] {
-  --ifm-background-color: #242526; /* Dark background */
-  --ifm-background-surface-color: #2e2e2e; /* Darker surface */
-  --ifm-font-color-base: #e2e2e2; /* Light gray text */
+  --ifm-background-color: #0f172a; /* Dark blue background */
+  --ifm-background-surface-color: #1e293b; /* Darker surface */
+  --ifm-font-color-base: #e2e8f0; /* Light gray text */
   --ifm-color-primary: #25c2a0; /* Keep primary consistent for dark mode */
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -38,26 +56,334 @@ html[data-theme='dark'] {
   /* Dark mode specific form variables */
   --ifm-color-gray-300: #4b5563; /* Darker gray for borders in dark mode */
   --ifm-color-white: #1a1a1a; /* Dark background for inputs in dark mode */
+  --ifm-color-emphasis-100: #1e293b;
+  --ifm-color-emphasis-200: #334155;
+  --ifm-color-emphasis-300: #475569;
+  --ifm-color-emphasis-400: #64748b;
+  --ifm-color-emphasis-500: #94a3b8;
+  --ifm-color-emphasis-600: #cbd5e1;
+  --ifm-color-emphasis-700: #e2e8f0;
+  --ifm-color-emphasis-800: #f1f5f9;
+  --ifm-color-emphasis-900: #f8fafc;
+}
+
+/* Apply gradient background to body */
+body {
+  background: var(--ifm-background-gradient);
+  background-attachment: fixed;
+}
+
+/* Enhanced background with animated dots */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+    radial-gradient(2px 2px at 40px 70px, #ffffff, transparent),
+    radial-gradient(2px 2px at 100px 90px, #ffffff, transparent),
+    radial-gradient(2px 2px at 140px 170px, #a855f7, transparent),
+    radial-gradient(2px 2px at 200px 50px, #25c2a0, transparent),
+    radial-gradient(2px 2px at 300px 100px, #ffffff, transparent),
+    radial-gradient(2px 2px at 350px 180px, #a855f7, transparent),
+    radial-gradient(2px 2px at 400px 40px, #25c2a0, transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 400px 400px;
+  }
+}
+
+/* Navbar styling */
+.navbar {
+  background: linear-gradient(135deg, #0f172a, #1e293b) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(37, 194, 160, 0.2) !important;
+}
+
+.navbar__title {
+  color: #ffffff !important;
+  font-weight: bold;
+  font-size: 1.3rem;
+  background: linear-gradient(to right, #25c2a0, #a855f7) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.navbar__link,
+.navbar__item {
+  color: #e2e8f0 !important;
+  transition: all 0.3s ease;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+}
+
+.navbar__link:hover,
+.navbar__item:hover {
+  background: linear-gradient(135deg, #25c2a0, #a855f7) !important;
+  border-radius: 8px !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 194, 160, 0.3) !important;
+}
+
+.navbar__items--right .navbar__item,
+.navbar__items--right .navbar__link {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 20px !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar__items--right .navbar__item:hover,
+.navbar__items--right .navbar__link:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) scale(1.05) !important;
 }
 
 /* Chapters Modules Card Design - Hover Effect */
 .menu__link {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: all 0.3s ease !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #ffffff, #f0fdfa) !important;
+  margin: 5px 0 !important;
+  border-left: 4px solid #25c2a0 !important;
 }
 
 .menu__link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(37, 194, 160, 0.2) !important;
+  background: linear-gradient(135deg, #f0fdfa, #e0f2fe) !important;
+  border-left: 4px solid #a855f7 !important;
 }
 
-/* If chapters are rendered as actual cards in a grid, this might also apply */
+/* Card styling for chapter modules */
 .card {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: all 0.3s ease !important;
+  border-radius: 16px !important;
+  border: none !important;
+  overflow: hidden !important;
+  background: linear-gradient(135deg, #1e293b, #334155) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+  position: relative !important;
+  color: #e2e8f0 !important;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(37, 194, 160, 0.4) !important;
+}
+
+.card__header h3 {
+  background: linear-gradient(135deg, #25c2a0, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Make sure doc content has proper background */
+.main-wrapper {
+  background: transparent !important;
+}
+
+.markdown {
+  background: rgba(255, 255, 255, 0.05) !important;
+  padding: 1.5rem !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Make sure sidebar has matching background */
+.menu {
+  background: rgba(30, 41, 59, 0.8) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 16px !important;
+  border: 1px solid rgba(37, 194, 160, 0.2) !important;
+}
+
+/* Enhanced headings */
+h1, h2, h3, h4, h5, h6 {
+  background: linear-gradient(135deg, #25c2a0, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  position: relative;
+}
+
+h1::after, h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, #25c2a0, #a855f7);
+  border-radius: 2px;
+}
+
+/* Enhanced button styling */
+.button {
+  background: linear-gradient(135deg, #25c2a0, #a855f7) !important;
+  border: none !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 50px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+  box-shadow: 0 4px 10px rgba(37, 194, 160, 0.3) !important;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 2px solid transparent !important;
+}
+
+.button:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 8px 15px rgba(37, 194, 160, 0.4) !important;
+  color: white !important;
+  border: 2px solid #ffffff !important;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #21af90, #9333ea);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+/* Next and Previous page buttons */
+.pagination-nav__link {
+  background: linear-gradient(135deg, #25c2a0, #a855f7) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.pagination-nav__link:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 15px rgba(37, 194, 160, 0.4) !important;
+  border: 2px solid #ffffff !important;
+}
+
+.pagination-nav__link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #21af90, #9333ea);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.pagination-nav__link:hover::before {
+  opacity: 1;
+}
+
+.pagination-nav__label {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Edit this page button */
+.theme-edit-this-page {
+  background: linear-gradient(135deg, #25c2a0, #a855f7) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  margin-top: 1rem !important;
+  transition: all 0.3s ease !important;
+  border: 2px solid transparent !important;
+}
+
+.theme-edit-this-page:hover {
+  background: linear-gradient(135deg, #21af90, #9333ea) !important;
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 6px 15px rgba(37, 194, 160, 0.4) !important;
+  color: white !important;
+  border: 2px solid #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Table of Contents heading*/
+.table-of-contents__link--active,
+.table-of-contents__link {
+  color: #25c2a0 !important;
+  font-weight: 500;
+}
+
+.table-of-contents__link:hover {
+  color: #a855f7 !important;
+  text-decoration: none !important;
+}
+
+/* Table of Contents heading title */
+.table-of-contents__title {
+  background: linear-gradient(135deg, #25c2a0, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold !important;
+  font-size: 1.3rem !important;
+}
+
+/* Auth buttons */
+.auth-button {
+  background: linear-gradient(135deg, #25c2a0, #a855f7) !important;
+  border: none !important;
+  color: white !important;
+  padding: 1.2rem 1rem !important;
+  border-radius: 50px !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  margin-top: 1.5rem !important;
+  box-shadow: 0 8px 20px rgba(37, 194, 160, 0.3) !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  margin: 1.5rem auto 0 !important;
+  display: block !important;
+}
+
+.auth-button:hover {
+  background: linear-gradient(135deg, #21af90, #9333ea) !important;
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 12px 25px rgba(37, 194, 160, 0.4) !important;
 }
 
 
